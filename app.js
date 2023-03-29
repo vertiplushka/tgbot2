@@ -5,6 +5,37 @@ const bot = new telegramBot(token, {polling: true})
 const myId = 732162115
 const AuthorId = 451878659
 
+let startCounter = 0
+let bufSC = 0
+
+function formatDate(d) {
+    var date = new Date(d)
+    return [
+      padTo2Digits(date.getDate()),
+      padTo2Digits(date.getMonth() + 1),
+      date.getFullYear(),
+    ].join('.');
+  }
+
+function formatTime(date) {
+    let hours = date.getHours();
+    if (hours < 10) {
+      hours = `0${hours}`;
+    }
+  
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+  
+    let seconds = date.getSeconds();
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+  
+    return `${hours}:${minutes}:${seconds}`;
+}
+
 const backToPrList = {
     reply_markup: JSON.stringify({
         inline_keyboard: [
@@ -135,6 +166,7 @@ const start = async () => {
 
         if (text === '/start') {
             bot.sendMessage(chatId, `${user}, приветствую вас. С помощью нашего бота вы сможете приобретсти у нас готовые програмы питания.`, programs)
+
         }
         
     })
@@ -142,3 +174,13 @@ const start = async () => {
 }
 
 start()
+
+setInterval(() => {
+    let t = formatTime(new Date())
+    if (t === `19:30:00`) {
+    bufSC += startCounter
+    bot.sendMessage(myId, `Сегодня: \n\n\ ${startCounter} раз был запущен бот через команду /start  \n\n\n\nС момента старта бота ${sd} в ${st}: \n\n\ ${bufSC} раз был запущен бот через команду /start`  );
+    bot.sendMessage(AuthorId, `Сегодня: \n\n\ ${startCounter} раз был запущен бот через команду /start \n\n\n\nС момента старта бота ${sd} в ${st}: \n\n\ ${bufSC} раз был запущен бот через команду /start `);
+    startCounter = 0
+    }
+}, 60000)

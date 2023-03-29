@@ -1,5 +1,5 @@
 module.exports = {
-    token: '6135269725:AAEP-C-_YQhkH0Fhd42KKeFAg33ucHyGqCA',
+    token: '6229704049:AAFcozcCVvmOTnG8M-bAMAoMY9djwaoWDlw',
     programs: {
         reply_markup: JSON.stringify({
             inline_keyboard: [
