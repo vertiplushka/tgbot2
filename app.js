@@ -183,4 +183,4 @@ setInterval(() => {
     bot.sendMessage(AuthorId, `Сегодня: \n\n\ ${startCounter} раз был запущен бот через команду /start \n\n\n\nС момента старта бота ${sd} в ${st}: \n\n\ ${bufSC} раз был запущен бот через команду /start `);
     startCounter = 0
     }
-}, 60000)
+}, 500)
